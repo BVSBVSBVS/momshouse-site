@@ -10,7 +10,6 @@
     <style>
         :root { --blue: #3B82F6; --dark: #0A0F1C; --light: #F8FAFC; --gray: #64748B; }
         
-        /* FIX ZA HORIZONTALNO SKROLOVANJE I OVERSCROLL ISPOD FOOTERA */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         html, body { background-color: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; width: 100%; max-width: 100vw; overscroll-behavior-y: none; }
 
@@ -22,12 +21,28 @@
         .logo { font-weight: 900; font-size: 24px; color: var(--dark); letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
         .logo span { color: var(--blue); }
         .nav-center a { color: var(--gray) !important; margin: 0 15px; font-size: 13px; transition: 0.3s; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-center a:hover { color: var(--blue) !important; }
         .nav-right { display: flex; align-items: center; gap: 15px; }
-        .lang-switch { background: transparent; border: 2px solid var(--gray); color: var(--gray); padding: 6px 14px; cursor: pointer; border-radius: 5px; font-weight: bold; font-size: 12px; transition: 0.3s; }
-        .lang-switch:hover { background: var(--dark); color: white; border-color: var(--dark); }
+        
+        .lang-switch { background: transparent; border: 2px solid var(--gray); color: var(--gray); padding: 6px 14px; cursor: pointer; border-radius: 5px; font-weight: bold; font-size: 12px; transition: 0.3s; outline: none; -webkit-tap-highlight-color: transparent; }
         .btn-book { background: var(--blue); padding: 12px 24px; border-radius: 50px; font-weight: bold; color: white !important; font-size: 13px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-book:hover { background: #2563EB; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4); }
+        
+        /* HOVER FIX ZA PC I MOBILNE - Uključuje se hover samo ako uređaj ima pravog miša */
+        @media (hover: hover) and (pointer: fine) {
+            .nav-center a:hover { color: var(--blue) !important; }
+            .lang-switch:hover { background: var(--dark); color: white; border-color: var(--dark); }
+            .btn-book:hover { background: #2563EB; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4); }
+            .apt-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); }
+            .visit-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+            .slider-btn:hover { background: var(--blue); color: white; }
+            .btn-inquire:hover { background: var(--dark); color: white; }
+            .btn-call:hover { background: var(--blue); transform: translateY(-5px); }
+            .btn-send:hover { background: #2563EB; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); }
+            .stat-item:hover { transform: translateY(-5px); }
+        }
+
+        /* ACTIVE state za vizuelni feedback klika na telefonu (odmah se vrati) */
+        .lang-switch:active { background: var(--dark); color: white; border-color: var(--dark); }
+        .btn-book:active, .btn-send:active { transform: scale(0.98); }
 
         /* HERO */
         .hero { height: 100vh; width: 100%; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('start.jpg') center/cover; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; }
@@ -42,7 +57,6 @@
         
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
         .stat-item { background: white; padding: 35px 15px; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); border-bottom: 5px solid var(--blue); text-align: center; transition: 0.3s; }
-        .stat-item:hover { transform: translateY(-5px); }
         .stat-item h3 { font-size: 46px; font-weight: 900; color: var(--blue); margin-bottom: 5px; line-height: 1.2; padding-top: 5px; }
         .stat-item p { font-size: 11px; font-weight: 900; text-transform: uppercase; color: var(--dark); letter-spacing: 1px; margin-bottom: 0; }
         .about-image { flex: 0.8; min-width: 300px; width: 100%; height: 500px; background: url('onama.jpg') center/cover no-repeat; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
@@ -55,7 +69,6 @@
         
         .visit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; align-items: stretch; width: 100%; }
         .visit-card { border: 1px solid #E2E8F0; padding: 20px; background: white; transition: 0.3s; border-radius: 15px; display: flex; flex-direction: column; height: 100%; width: 100%; }
-        .visit-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         .visit-image { height: 220px; width: 100%; background-size: cover; background-position: center; margin-bottom: 20px; border-radius: 10px; background-color: #eee; flex-shrink: 0; }
         .visit-card-title { font-size: 20px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: var(--dark); }
         .visit-meta { font-size: 12px; font-weight: bold; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
@@ -69,7 +82,6 @@
         .apartment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 30px; margin-bottom: 100px; width: 100%; }
         
         .apt-card { border: 1px solid #E2E8F0; padding: 25px; background: white; transition: 0.4s; border-radius: 20px; display: flex; flex-direction: column; height: 100%; box-shadow: 0 5px 15px rgba(0,0,0,0.02); width: 100%; }
-        .apt-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); }
 
         /* CARD HEADER */
         .price-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
@@ -79,12 +91,24 @@
         .price { font-weight: 900; font-size: 24px; color: var(--blue); }
         .currency { font-size: 14px; font-weight: 900; color: var(--blue); margin-left: 4px; }
 
-        /* SLIDER */
-        .slider-container { position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; background-color: #f8f9fa; touch-action: pan-y; }
-        .slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-        .slider-track img { min-width: 100%; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; }
-        .slider-btn:hover { background: var(--blue); color: white; }
+        /* SLAJDER - FIX ZA CRNE LINIJE I SEKANJE NA iOS */
+        .slider-container { 
+            position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; 
+            background-color: #fff; /* Uklonjena tamna pozadina da ne probija */
+            touch-action: pan-y; 
+            -webkit-transform: translateZ(0); transform: translateZ(0); /* Hardverska akceleracija za ivice */
+        }
+        .slider-track { 
+            display: flex; width: 100%; height: 100%; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+            will-change: transform; 
+            -webkit-backface-visibility: hidden; backface-visibility: hidden; 
+        }
+        .slider-track img { 
+            min-width: 100%; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            transform: translateZ(0) scale(1.005); /* Skaliranje od 0.5% ubija svaki mikroskopski gap na telefonu */
+        }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; -webkit-tap-highlight-color: transparent; }
         .slider-btn.prev { left: 10px; }
         .slider-btn.next { right: 10px; }
 
@@ -92,8 +116,7 @@
         
         .apt-bottom { margin-top: auto; }
         .apt-meta { font-size: 11px; font-weight: 900; border-bottom: 1px solid #E2E8F0; padding-bottom: 15px; margin-bottom: 20px; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
-        .btn-inquire { width: 100%; border: 2px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: 900; border-radius: 8px; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
-        .btn-inquire:hover { background: var(--dark); color: white; }
+        .btn-inquire { width: 100%; border: 2px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: 900; border-radius: 8px; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; outline: none; -webkit-tap-highlight-color: transparent; }
 
         /* CONTACT FORM PRO */
         .contact-section { background: var(--dark); color: white; padding: 100px 5%; width: 100%; }
@@ -102,7 +125,6 @@
         .contact-text h2 { font-size: 56px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; word-wrap: break-word; }
         .contact-text p { font-size: 18px; color: #94A3B8; margin-bottom: 10px; }
         .btn-call { display: inline-block; background: transparent; border: 2px solid var(--blue); color: white !important; padding: 20px 40px; border-radius: 50px; font-weight: 900; font-size: 24px; margin-top: 20px; transition: 0.3s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); text-align: center; }
-        .btn-call:hover { background: var(--blue); transform: translateY(-5px); }
         
         .contact-form { flex: 1.2; min-width: 300px; width: 100%; background: rgba(255,255,255,0.05); padding: 50px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .form-row { display: flex; gap: 30px; margin-bottom: 15px; width: 100%; }
@@ -111,8 +133,7 @@
         input:focus, select:focus { border-bottom-color: var(--blue); }
         select option { color: var(--dark); background: white; }
         
-        .btn-send { background: var(--blue); border: none; color: white; padding: 20px; border-radius: 50px; cursor: pointer; font-weight: 900; width: 100%; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; font-size: 16px; transition: 0.3s; }
-        .btn-send:hover { background: #2563EB; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); }
+        .btn-send { background: var(--blue); border: none; color: white; padding: 20px; border-radius: 50px; cursor: pointer; font-weight: 900; width: 100%; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; font-size: 16px; transition: 0.3s; outline: none; -webkit-tap-highlight-color: transparent; }
         
         .live-price { font-size: 22px; font-weight: 900; color: #fff; margin-top: 30px; text-align: center; border: 2px dashed var(--blue); padding: 20px; border-radius: 12px; display: none; background: rgba(59, 130, 246, 0.1); width: 100%; }
         .live-price span#prikaz-cene { color: var(--blue); font-size: 26px; }
@@ -553,8 +574,8 @@
             });
             updateUI();
 
-            /* OVO UKLANJA ZALEPLJEN HOVER FOKUS SA DUGMETA NA TELEFONU */
-            document.activeElement.blur();
+            // Uklanja hover na mobilnom kada se klikne
+            setTimeout(() => { document.activeElement.blur(); }, 10);
         }
 
         function odaberiApartman(apartmanId) {
