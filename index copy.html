@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mom's House 2 | Golubac</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --blue: #3B82F6; --dark: #0A0F1C; --light: #F8FAFC; --gray: #64748B; --black-over: rgba(0,0,0,0.95); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+
+        .lang-en { display: none; }
+        a { text-decoration: none; color: inherit; }
+
+        /* NAVBAR */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; position: fixed; width: 100%; z-index: 1000; background: rgba(10, 15, 28, 0.95); backdrop-filter: blur(10px); }
+        .logo { font-weight: 900; font-size: 24px; color: white; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .logo:hover { color: var(--gray); }
+        .logo span { color: var(--blue); }
+        
+        .nav-center a { color: white !important; margin: 0 15px; font-size: 14px; transition: 0.3s; font-weight: bold; }
+        .nav-center a:hover { color: var(--blue) !important; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .lang-switch { background: transparent; border: 1px solid white; color: white; padding: 5px 10px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .lang-switch:hover { background: white; color: var(--dark); }
+        .btn-book { background: var(--blue); padding: 10px 20px; border-radius: 50px; font-weight: bold; color: white !important; }
+
+        /* HERO */
+        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('start.jpg') center/cover; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; }
+        .hero h1 { font-size: 10vw; font-weight: 900; letter-spacing: -2px; margin-bottom: 10px; text-transform: uppercase; }
+        .subtitle { letter-spacing: 5px; font-size: 14px; opacity: 0.8; text-transform: uppercase; }
+
+        /* ABOUT - DESKTOP */
+        .about-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; display: flex; gap: 50px; align-items: center; }
+        .about-text { flex: 1; }
+        .about-text h2 { font-size: 40px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .about-text p { color: var(--gray); margin-bottom: 15px; }
+        .about-image { flex: 1; height: 400px; background: url('onama.jpg') center/cover no-repeat; background-color: #ddd; border-radius: 10px; }
+
+        /* VISIT */
+        .visit-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-top: 50px; }
+        .visit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .visit-card { border: 1px solid #E2E8F0; padding: 20px; background: white; transition: 0.3s; border-radius: 10px; display: flex; flex-direction: column; height: 100%; }
+        .visit-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .visit-image { height: 200px; background-size: cover; background-position: center; margin-bottom: 20px; border-radius: 5px; background-color: #eee; }
+        .visit-card-title { font-size: 18px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+        .visit-meta { font-size: 12px; font-weight: bold; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .visit-desc { color: var(--gray); font-size: 14px; }
+
+        /* APARTMENTS */
+        .apartments-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; margin-top: 50px; }
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .section-header h2 { font-size: 48px; font-weight: 900; line-height: 1.1; margin-top: 10px; text-transform: uppercase; letter-spacing: 3px; }
+        .section-header .label { color: var(--gray); font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+        .apartment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .apt-card { border: 1px solid #E2E8F0; padding: 20px; background: white; transition: 0.3s; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+        .apt-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        
+        /* NOVI SLAJDER CSS */
+        .slider-container { position: relative; width: 100%; height: 250px; border-radius: 8px; overflow: hidden; margin-bottom: 15px; touch-action: pan-y; background-color: #eee; }
+        .slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
+        .slider-track img { min-width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; z-index: 10; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
+        .slider-btn:hover { background: var(--blue); }
+
+        .price-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
+        .apt-title { font-size: 20px; font-weight: 700; text-transform: uppercase; color: var(--dark); }
+        .apt-tag { color: var(--blue); font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .price { font-weight: 900; font-size: 24px; color: var(--blue); display: flex; align-items: baseline; gap: 5px; }
+        .starting-from { font-size: 12px; color: var(--gray); font-weight: bold; text-transform: uppercase; }
+        .price span.currency { font-size: 14px; font-weight: 400; color: var(--gray); }
+        .apt-desc { color: var(--gray); font-size: 14px; margin-bottom: 20px; }
+        .apt-meta { margin-top: auto; font-size: 12px; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
+        .btn-inquire { width: 100%; border: 1px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: bold; border-radius: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-inquire:hover { background: var(--dark); color: white; }
+
+        /* CONTACT */
+        .contact-section { background: var(--dark); color: white; padding: 100px 5%; margin-top: 50px; }
+        .contact-container { display: flex; flex-wrap: wrap; gap: 50px; max-width: 1400px; margin: 0 auto; }
+        .contact-text { flex: 1; min-width: 300px; }
+        .contact-text h2 { font-size: 48px; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-call { display: inline-block; background: transparent; border: 2px solid var(--blue); color: var(--blue) !important; padding: 15px 30px; border-radius: 50px; font-weight: bold; font-size: 20px; margin-top: 20px; transition: 0.3s; }
+        .btn-call:hover { background: var(--blue); color: white !important; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4); }
+        .contact-form { flex: 1; min-width: 300px; }
+        .form-row { display: flex; gap: 20px; }
+        .form-row select { flex: 1; }
+        input, select { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--gray); color: white; padding: 15px 0; margin-bottom: 40px; outline: none; font-size: 16px; }
+        select option { color: var(--dark); }
+        .btn-send { background: var(--blue); border: none; color: white; padding: 15px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; width: 100%; }
+        .btn-send:hover { background: #2563EB; }
+        .live-price { font-size: 18px; font-weight: bold; color: var(--blue); margin-bottom: 20px; display: none; text-align: center; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px; background: #050810; color: var(--gray); font-size: 12px; }
+        .footer span { color: white; font-weight: bold; }
+
+        /* MOBILNA OPTIMIZACIJA */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 5%; justify-content: space-between; }
+            .logo { font-size: 16px; }
+            .nav-center { display: none; }
+            .nav-right { gap: 10px; }
+            .lang-switch { padding: 6px 10px; font-size: 12px; }
+            .btn-book { padding: 8px 12px; font-size: 12px; }
+            .hero h1 { font-size: 60px; }
+            .about-section { flex-direction: column; text-align: center; }
+            .about-image { flex: none !important; display: block !important; width: 100% !important; height: 300px !important; margin-top: 20px; }
+            .contact-container { flex-direction: column; text-align: center; }
+            .section-header h2, .visit-card-title, .contact-text h2 { font-size: 32px; }
+            .apartment-grid, .visit-grid { grid-template-columns: 1fr; }
+            .form-row { flex-direction: column; gap: 0; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <nav class="navbar">
+        <a href="#top" class="logo">MOM'S HOUSE 2</a>
+        <div class="nav-center">
+            <a href="#about" class="translatable" data-sr="O nama" data-en="About us">O nama</a>
+            <a href="#visit" class="translatable" data-sr="Šta obići" data-en="What to visit">Šta obići</a>
+            <a href="#apartments" class="translatable" data-sr="Smeštaj" data-en="Accommodation">Smeštaj</a>
+            <a href="#contact" class="translatable" data-sr="Kontakt" data-en="Contact">Kontakt</a>
+        </div>
+        <div class="nav-right">
+            <button class="lang-switch" onclick="toggleLanguage()">EN</button>
+            <a href="#contact" class="btn-book translatable" data-sr="Rezerviši" data-en="Book now">Rezerviši</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>GOLUBAC</h1>
+            <p class="subtitle translatable" data-sr="VAŠ DOM NA DUNAVU" data-en="YOUR HOME ON THE DANUBE">VAŠ DOM NA DUNAVU</p>
+        </div>
+    </header>
+
+    <section id="about" class="about-section">
+        <div class="about-image"></div>
+        <div class="about-text">
+            <h2 class="translatable" data-sr="Domaćinski duh" data-en="HOME FEELING">Domaćinski duh</h2>
+            <p class="translatable" data-sr="Dobrodošli u naše apartmane u srcu Golubca. Mi smo porodica koja već godinama dočekuje goste iz celog sveta, trudeći se da im pružimo pravi domaći osećaj uz najlepši pogled na Dunav i Golubačku tvrđavu." data-en="Welcome to our apartments in the heart of Golubac. We are a family that has been welcoming guests from all over the world for years, striving to provide a true home feeling with the best view of the Danube and the Golubac Fortress.">Dobrodošli u naše apartmane u srcu Golubca. Mi smo porodica koja već godinama dočekuje goste iz celog sveta, trudeći se da im pružimo pravi domaći osećaj uz najlepši pogled na Dunav i Golubačku tvrđavu.</p>
+            <p class="translatable" data-sr="Naši apartmani su renovirani sa puno ljubavi, spajajući moderan komfor sa autentičnim duhom istočne Srbije. Tu smo da vam preporučimo najbolje restorane, skrivene plaže i biciklističke rute." data-en="Our apartments are renovated with a lot of love, combining modern comfort with the authentic spirit of eastern Serbia. We are here to recommend the best local restaurants, hidden beaches, and biking routes.">Naši apartmani su renovirani sa puno ljubavi, spajajući moderan komfor sa autentičnim duhom istočne Srbije. Tu smo da vam preporučimo najbolje restorane, skrivene plaže i biciklističke rute.</p>
+        </div>
+    </section>
+
+    <section id="visit" class="visit-section">
+        <div class="section-header">
+            <span class="label translatable" data-sr="LOKALNE ATRAKCIJE" data-en="LOCAL ATTRACTIONS">LOKALNE ATRAKCIJE</span>
+            <h2 class="translatable" data-sr="Otkrijte lepotu Đerdapa" data-en="Discover the beauty of Djerdap">Otkrijte lepotu Đerdapa</h2>
+        </div>
+        <div class="visit-grid">
+            <div class="visit-card">
+                <div class="visit-image" style="background-image: url('tvrdjava.jpg')"></div>
+                <div class="visit-card-title translatable" data-sr="Golubačka tvrđava" data-en="Golubac Fortress">Golubačka tvrđava</div>
+                <div class="visit-meta translatable" data-sr="Na ~7km udaljenosti" data-en="~7km distance">Na ~7km udaljenosti</div>
+                <p class="visit-desc translatable" data-sr="Prelepa, renovirana tvrđava na samom ulazu u Đerdapsku klisuru, svedok vekovne istorije." data-en="A beautiful, renovated fortress at the very entrance of the Djerdap gorge, a witness to centuries of history.">Prelepa, renovirana tvrđava na samom ulazu u Đerdapsku klisuru, svedok vekovne istorije.</p>
+            </div>
+            <div class="visit-card">
+                <div class="visit-image" style="background-image: url('lepenskivir.jpg')"></div>
+                <div class="visit-card-title translatable" data-sr="Lepenski Vir" data-en="Lepenski Vir">Lepenski Vir</div>
+                <div class="visit-meta translatable" data-sr="Na ~39km od nas" data-en="~39km from us">Na ~39km od nas</div>
+                <p class="visit-desc translatable" data-sr="Jedno od najznačajnijih praistorijskih arheoloških nalazišta u Evropi, kolevka evropske civilizacije." data-en="One of the most important prehistoric archaeological sites in Europe, the cradle of European civilization.">Jedno od najznačajnijih praistorijskih arheoloških nalazišta u Evropi, kolevka evropske civilizacije.</p>
+            </div>
+            <div class="visit-card">
+                <div class="visit-image" style="background-image: url('djerdap.jpg')"></div>
+                <div class="visit-card-title translatable" data-sr="Nacionalni Park Đerdap" data-en="Djerdap National Park">Nacionalni Park Đerdap</div>
+                <div class="visit-meta translatable" data-sr="UŽIVAJTE U PRIRODI" data-en="ENJOY NATURE">UŽIVAJTE U PRIRODI</div>
+                <p class="visit-desc translatable" data-sr="Najveća klisura u Evropi, raj za ljubitelje prirode, planinarenja, ribolova i netaknutih pejzaža." data-en="The largest gorge in Europe, a paradise for nature lovers, hiking, fishing, and pristine landscapes.">Najveća klisura u Evropi, raj za ljubitelje prirode, planinarenja, ribolova i netaknutih pejzaža.</p>
+            </div>
+            <div class="visit-card">
+                <div class="visit-image" style="background-image: url('viminacijum.jpg')"></div>
+                <div class="visit-card-title translatable" data-sr="Arheološki Park Viminacijum" data-en="Viminacium Archaeological Park">Arheološki Park Viminacijum</div>
+                <div class="visit-meta translatable" data-sr="ANTIKA NA DUNAVU" data-en="ANTIQUITY ON THE DANUBE">ANTIKA NA DUNAVU</div>
+                <p class="visit-desc translatable" data-sr="Rimski grad i vojni logor na ušću Mlave u Dunav, svedočanstvo moći Rimskog carstva na ovim prostorima." data-en="Roman city and military camp at the mouth of the Mlava into the Danube, a testimony to the power of the Roman Empire in these areas.">Rimski grad i vojni logor na ušću Mlave u Dunav, svedočanstvo moći Rimskog carstva na ovim prostorima.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="apartments" class="apartments-section">
+        <div class="section-header">
+            <span class="label translatable" data-sr="NAŠA PONUDA" data-en="OUR OFFER">NAŠA PONUDA</span>
+            <h2 class="translatable" data-sr="IZABERITE SVOJ ODMOR" data-en="CHOOSE YOUR STAY">IZABERITE SVOJ ODMOR</h2>
+        </div>
+
+        <div class="apartment-grid">
+            
+            <div class="apt-card">
+                <div class="apt-tag translatable" data-sr="POGLED NA REKU" data-en="RIVER VIEW">POGLED NA REKU</div>
+                <div class="price-row">
+                    <div class="apt-title translatable" data-sr="Apartman sa Pogledom na Reku" data-en="River View Apartment">Apartman sa Pogledom na Reku</div>
+                    <div class="price">
+                        <span class="starting-from translatable" data-sr="Od" data-en="From">Od</span>
+                        <span class="price-val" data-eur="45">5286</span>
+                        <span class="currency">RSD</span>
+                    </div>
+                </div>
+                
+                <div class="slider-container" id="slider-asp">
+                    <div class="slider-track" id="track-asp">
+                        <img src="asp_main.jpg" alt="Slika 1">
+                        <img src="asp_1.jpg" alt="Slika 2">
+                        <img src="asp_2.jpg" alt="Slika 3">
+                        <img src="aps_3.jpg" alt="Slika 4"> <img src="asp_4.jpg" alt="Slika 5">
+                        <img src="asp_5.jpg" alt="Slika 6">
+                        <img src="asp_6.jpg" alt="Slika 7">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide('asp', -1)">‹</button>
+                    <button class="slider-btn next" onclick="moveSlide('asp', 1)">›</button>
+                </div>
+                
+                <p class="apt-desc translatable" data-sr="Spavaća soba sa velikim bračnim krevetom i dnevna soba sa kaučem. Sopstvena kuhinja, kupatilo i prelep balkon sa direktnim pogledom na Dunav." data-en="Bedroom with a large double bed and a living room with a sofa. Private kitchen, bathroom, and a beautiful balcony with a direct view of the Danube.">Spavaća soba sa velikim bračnim krevetom i dnevna soba sa kaučem. Sopstvena kuhinja, kupatilo i prelep balkon sa direktnim pogledom na Dunav.</p>
+                <div class="apt-meta translatable" data-sr="✓ 50 m² ✓ Balkon ✓ WiFi ✓ Max 4 gosta" data-en="✓ 50 m² ✓ Balcony ✓ WiFi ✓ Max 4 guests">✓ 50 m² ✓ Balkon ✓ WiFi ✓ Max 4 gosta</div>
+                <button class="btn-inquire translatable" onclick="location.href='#contact'" data-sr="Pošalji upit" data-en="Inquire">Pošalji upit</button>
+            </div>
+
+            <div class="apt-card">
+                <div class="apt-tag translatable" data-sr="PRIZEMLJE" data-en="GROUND FLOOR">PRIZEMLJE</div>
+                <div class="price-row">
+                    <div class="apt-title translatable" data-sr="Apartman - Prizemlje" data-en="Ground Floor Apartment">Apartman - Prizemlje</div>
+                    <div class="price">
+                        <span class="starting-from translatable" data-sr="Od" data-en="From">Od</span>
+                        <span class="price-val" data-eur="40">4698</span>
+                        <span class="currency">RSD</span>
+                    </div>
+                </div>
+                
+                <div class="slider-container" id="slider-prizemlje">
+                    <div class="slider-track" id="track-prizemlje">
+                        <img src="prizemlje_1.jpg" alt="Slika 1">
+                        <img src="prizemlje_2.jpg" alt="Slika 2">
+                        <img src="prizemlje_3.jpg" alt="Slika 3">
+                        <img src="prizemlje_4.jpg" alt="Slika 4">
+                        <img src="prizemlje_5.jpg" alt="Slika 5">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide('prizemlje', -1)">‹</button>
+                    <button class="slider-btn next" onclick="moveSlide('prizemlje', 1)">›</button>
+                </div>
+                
+                <p class="apt-desc translatable" data-sr="Komforan apartman u prizemlju, idealan za porodicu. Sadrži bračni krevet, kauč na razvlačenje, kompletno opremljenu kuhinju i kupatilo." data-en="Comfortable ground floor apartment, ideal for a family. Features a double bed, sofa bed, fully equipped kitchen, and bathroom.">Komforan apartman u prizemlju, idealan za porodicu. Sadrži bračni krevet, kauč na razvlačenje, kompletno opremljenu kuhinju i kupatilo.</p>
+                <div class="apt-meta translatable" data-sr="✓ 38 m² ✓ Kuhinja ✓ WiFi ✓ Max 4 gosta" data-en="✓ 38 m² ✓ Kitchen ✓ WiFi ✓ Max 4 guests">✓ 38 m² ✓ Kuhinja ✓ WiFi ✓ Max 4 gosta</div>
+                <button class="btn-inquire translatable" onclick="location.href='#contact'" data-sr="Pošalji upit" data-en="Inquire">Pošalji upit</button>
+            </div>
+
+            <div class="apt-card">
+                <div class="apt-tag translatable" data-sr="BALKON" data-en="BALCONY">BALKON</div>
+                <div class="price-row">
+                    <div class="apt-title translatable" data-sr="Apartman sa Balkonom" data-en="Apartment with Balcony">Apartman sa Balkonom</div>
+                    <div class="price">
+                        <span class="starting-from translatable" data-sr="Od" data-en="From">Od</span>
+                        <span class="price-val" data-eur="45">5286</span>
+                        <span class="currency">RSD</span>
+                    </div>
+                </div>
+                
+                <div class="slider-container" id="slider-balkon">
+                    <div class="slider-track" id="track-balkon">
+                        <img src="balkon_1.jpg" alt="Slika 1">
+                        <img src="balkon_2.jpg" alt="Slika 2">
+                        <img src="balkon_3.jpg" alt="Slika 3">
+                        <img src="balkon_4.jpg" alt="Slika 4">
+                        <img src="balkon_5.jpg" alt="Slika 5">
+                        <img src="balkon_6.jpg" alt="Slika 6">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide('balkon', -1)">‹</button>
+                    <button class="slider-btn next" onclick="moveSlide('balkon', 1)">›</button>
+                </div>
+                
+                <p class="apt-desc translatable" data-sr="Prelep apartman sa terasom, spavaćom i dnevnom sobom. Obuhvata privatnu kuhinju, kupatilo, flat-screen TV i besplatan internet." data-en="Beautiful apartment with a terrace, bedroom, and living room. Includes a private kitchen, bathroom, flat-screen TV, and free internet.">Prelep apartman sa terasom, spavaćom i dnevnom sobom. Obuhvata privatnu kuhinju, kupatilo, flat-screen TV i besplatan internet.</p>
+                <div class="apt-meta translatable" data-sr="✓ 40 m² ✓ Balkon ✓ WiFi ✓ Max 4 gosta" data-en="✓ 40 m² ✓ Balcony ✓ WiFi ✓ Max 4 guests">✓ 40 m² ✓ Balkon ✓ WiFi ✓ Max 4 gosta</div>
+                <button class="btn-inquire translatable" onclick="location.href='#contact'" data-sr="Pošalji upit" data-en="Inquire">Pošalji upit</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-text">
+                <h2 class="translatable" data-sr="Planirajte vaš<br>odmor." data-en="Plan your<br>stay.">Planirajte vaš<br>odmor.</h2>
+                <p class="translatable" data-sr="Ili nas pozovite direktno:" data-en="Or call us directly:">Ili nas pozovite direktno:</p>
+                <a href="tel:+381659719791" class="btn-call">📞 065 971 97 91</a>
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <input type="text" id="klijent-ime" class="input-translatable" data-sr-placeholder="Vaše ime" data-en-placeholder="Your name" placeholder="Vaše ime" required>
+                        <input type="email" id="klijent-email" class="input-translatable" data-sr-placeholder="Email adresa" data-en-placeholder="Email address" placeholder="Email adresa" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <select id="apartment-select">
+                            <option value="Nisam siguran/na" class="translatable" data-sr="Izaberite apartman" data-en="Choose apartment">Izaberite apartman</option>
+                            <option value="Apartman sa Pogledom na Reku">Apartman sa Pogledom na Reku</option>
+                            <option value="Apartman - Prizemlje">Apartman - Prizemlje</option>
+                            <option value="Apartman sa Balkonom">Apartman sa Balkonom</option>
+                        </select>
+
+                        <select id="guest-select">
+                            <option value="Broj gostiju" class="translatable" data-sr="Broj gostiju" data-en="Number of guests">Broj gostiju</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    
+                    <div id="kalkulator-cene" class="live-price">
+                        <span class="translatable" data-sr="Procenjena cena: " data-en="Estimated price: ">Procenjena cena: </span>
+                        <span id="prikaz-cene"></span>
+                        <span class="translatable" data-sr=" / noć" data-en=" / night"> / noć</span>
+                    </div>
+                    
+                    <button type="button" class="btn-send translatable" onclick="posaljiMejl()" data-sr="Pošalji upit" data-en="Send Inquiry">Pošalji upit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Mom's House 2 © 2026</p>
+        <p style="margin-top: 10px;">Designed & Developed by <span>S-Code Solutions</span></p>
+    </footer>
+
+    <script>
+        let currentLang = 'sr';
+        let exchangeRate = 117; 
+
+        const ceneBooking = {
+            "Apartman sa Pogledom na Reku": { "1": 5286, "2": 5286, "3": 5873, "4": 6460 },
+            "Apartman - Prizemlje": { "1": 4698, "2": 4698, "3": 5286, "4": 5873 },
+            "Apartman sa Balkonom": { "1": 5286, "2": 5286, "3": 5873, "4": 6460 }
+        };
+
+        async function fetchLiveExchangeRate() {
+            try {
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/EUR');
+                const data = await response.json();
+                if (data && data.rates && data.rates.RSD) {
+                    exchangeRate = data.rates.RSD;
+                    if (currentLang === 'sr') { updateUI(); izracunajCenu(); }
+                }
+            } catch (error) { console.log("Koristim rezervni kurs."); }
+        }
+
+        function izracunajCenu() {
+            const apt = document.getElementById('apartment-select').value;
+            const gosti = document.getElementById('guest-select').value;
+            const kalkulatorDiv = document.getElementById('kalkulator-cene');
+            const prikazCene = document.getElementById('prikaz-cene');
+
+            if (ceneBooking[apt] && ceneBooking[apt][gosti]) {
+                const cenaRSD = ceneBooking[apt][gosti];
+                if (currentLang === 'sr') {
+                    prikazCene.innerText = cenaRSD + " RSD";
+                } else {
+                    prikazCene.innerText = "€" + Math.round(cenaRSD / exchangeRate);
+                }
+                kalkulatorDiv.style.display = 'block';
+            } else {
+                kalkulatorDiv.style.display = 'none';
+            }
+        }
+
+        document.getElementById('apartment-select').addEventListener('change', izracunajCenu);
+        document.getElementById('guest-select').addEventListener('change', izracunajCenu);
+
+        function posaljiMejl() {
+            var ime = document.getElementById('klijent-ime').value;
+            var email = document.getElementById('klijent-email').value;
+            var apartman = document.getElementById('apartment-select').value;
+            var gosti = document.getElementById('guest-select').value;
+            
+            if(!ime || !email) {
+                alert(currentLang === 'sr' ? 'Molimo popunite ime i email adresu.' : 'Please fill out your name and email.');
+                return;
+            }
+            var cenaIzvestaj = "";
+            if (ceneBooking[apartman] && ceneBooking[apartman][gosti]) {
+                cenaIzvestaj = "%0AProcenjena cena za klijenta: " + ceneBooking[apartman][gosti] + " RSD / noć";
+            }
+            var roditeljskiMejl = "TVOJ_MEJL@gmail.com"; 
+            var subject = "Novi upit za smeštaj: " + apartman;
+            var body = "Ime: " + ime + "%0AEmail: " + email + "%0A%0AZainteresovan/a sam za: " + apartman + "%0ABroj gostiju: " + gosti + cenaIzvestaj + ".%0A%0AMolimo Vas da mi javite detalje.";
+            window.location.href = "mailto:" + roditeljskiMejl + "?subject=" + subject + "&body=" + body;
+        }
+
+        function updateUI() {
+            document.querySelectorAll('.price-val').forEach(el => {
+                let eurPrice = parseInt(el.getAttribute('data-eur'));
+                let currencyLabel = el.nextElementSibling;
+                if (currentLang === 'sr') {
+                    el.innerText = Math.round(eurPrice * exchangeRate);
+                    currencyLabel.innerText = ' RSD';
+                } else {
+                    el.innerText = '€' + eurPrice;
+                    currencyLabel.innerText = '';
+                }
+            });
+            document.querySelectorAll('.translatable').forEach(el => { 
+                el.innerHTML = el.getAttribute(`data-${currentLang}`); 
+            });
+            document.querySelectorAll('.input-translatable').forEach(el => { 
+                el.placeholder = el.getAttribute(`data-${currentLang}-placeholder`); 
+            });
+            const selectApt = document.getElementById('apartment-select');
+            if (currentLang === 'en') {
+                selectApt.options[1].text = "River View Apartment";
+                selectApt.options[2].text = "Ground Floor Apartment";
+                selectApt.options[3].text = "Apartment with Balcony";
+            } else {
+                selectApt.options[1].text = "Apartman sa Pogledom na Reku";
+                selectApt.options[2].text = "Apartman - Prizemlje";
+                selectApt.options[3].text = "Apartman sa Balkonom";
+            }
+            izracunajCenu(); 
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'sr' ? 'en' : 'sr';
+            document.querySelector('.lang-switch').innerText = currentLang === 'sr' ? 'EN' : 'SR';
+            updateUI();
+        }
+
+        // ==========================================
+        // SLAJDER LOGIKA (Strelice + Swipe prstom)
+        // ==========================================
+        const sliderState = {
+            asp: { index: 0, max: 0 },
+            prizemlje: { index: 0, max: 0 },
+            balkon: { index: 0, max: 0 }
+        };
+
+        function moveSlide(sliderId, direction) {
+            const state = sliderState[sliderId];
+            const track = document.getElementById('track-' + sliderId);
+            
+            state.index += direction;
+            if (state.index < 0) state.index = state.max;
+            if (state.index > state.max) state.index = 0;
+
+            track.style.transform = `translateX(-${state.index * 100}%)`;
+        }
+
+        function initSliders() {
+            document.querySelectorAll('.slider-container').forEach(container => {
+                const sliderId = container.id.replace('slider-', '');
+                sliderState[sliderId].max = document.querySelectorAll(`#track-${sliderId} img`).length - 1;
+                
+                let startX = 0;
+                let endX = 0;
+
+                container.addEventListener('touchstart', e => {
+                    startX = e.touches[0].clientX;
+                }, {passive: true});
+
+                container.addEventListener('touchend', e => {
+                    endX = e.changedTouches[0].clientX;
+                    if (startX - endX > 40) moveSlide(sliderId, 1);
+                    if (endX - startX > 40) moveSlide(sliderId, -1);
+                });
+            });
+        }
+
+        window.onload = () => { 
+            updateUI(); 
+            fetchLiveExchangeRate(); 
+            initSliders(); // Pokrece slajdere na ucitavanju
+        };
+    </script>
+</body>
+</html>
