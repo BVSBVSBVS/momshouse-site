@@ -48,7 +48,7 @@
         .hero h1 { font-size: 8vw; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; margin-bottom: 10px; }
         .subtitle { letter-spacing: 5px; font-size: 16px; opacity: 0.9; text-transform: uppercase; font-weight: bold; }
 
-        /* ABOUT & PRO STATS */
+        /* ABOUT & PRO STATS - POVEĆANI BEDŽEVI NA PC-u */
         .about-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; display: flex; gap: 80px; align-items: center; flex-wrap: wrap; width: 100%; }
         .about-text { flex: 1.2; min-width: 0; width: 100%; }
         .about-text h2 { font-size: 42px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; line-height: 1.1; }
@@ -90,7 +90,7 @@
         .price { font-weight: 900; font-size: 24px; color: var(--blue); }
         .currency { font-size: 14px; font-weight: 900; color: var(--blue); margin-left: 4px; }
 
-        /* SLAJDER FIX: UBIJENA CRNA LINIJA (PREKLAPANJE ZA TAČNO 1 PIKSEL) */
+        /* SLAJDER - ZAUVEK UBIO CRNU LINIJU (OBJECT-FIT: COVER ZAKUCAVA) */
         .slider-container { 
             position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; 
             background-color: transparent; touch-action: pan-y; 
@@ -102,11 +102,12 @@
             will-change: transform; 
         }
         .slider-track img { 
-            flex: 0 0 100%; min-width: calc(100% + 1px); margin-right: -1px; /* Dodaje 1px da zaključa ivicu */
-            height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
+            flex: 0 0 100%; width: 100%; height: 100%; max-width: none;
+            object-fit: cover; /* OVO JE KONAČAN FIX - CENTRIRA I POKRIVA SAV PROSTOR! */
+            -webkit-user-drag: none; pointer-events: none; 
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
         }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; -webkit-tap-highlight-color: transparent; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         .slider-btn.prev { left: 10px; }
         .slider-btn.next { right: 10px; }
 
@@ -114,7 +115,7 @@
         
         .apt-bottom { margin-top: auto; }
         .apt-meta { font-size: 11px; font-weight: 900; border-bottom: 1px solid #E2E8F0; padding-bottom: 15px; margin-bottom: 20px; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
-        .btn-inquire { width: 100%; border: 2px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: 900; border-radius: 8px; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; outline: none; -webkit-tap-highlight-color: transparent; }
+        .btn-inquire { width: 100%; border: 2px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: 900; border-radius: 8px; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; outline: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
         /* CONTACT FORM PRO */
         .contact-section { background: var(--dark); color: white; padding: 100px 5%; width: 100%; }
@@ -127,12 +128,12 @@
         
         .contact-form { flex: 1.2; min-width: 0; width: 100%; background: rgba(255,255,255,0.05); padding: 50px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .form-row { display: flex; gap: 30px; margin-bottom: 15px; width: 100%; }
-        input, select { width: 100%; background: transparent; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); color: white; padding: 20px 0; outline: none; font-size: 16px; transition: 0.3s; font-weight: bold; border-radius: 0; }
+        input, select { width: 100%; background: transparent; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); color: white; padding: 20px 0; outline: none; font-size: 16px; transition: 0.3s; font-weight: bold; border-radius: 0; touch-action: manipulation; }
         input::placeholder { color: rgba(255,255,255,0.5); }
         input:focus, select:focus { border-bottom-color: var(--blue); }
         select option { color: var(--dark); background: white; }
         
-        .btn-send { background: var(--blue); border: none; color: white; padding: 20px; border-radius: 50px; cursor: pointer; font-weight: 900; width: 100%; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; font-size: 16px; transition: 0.3s; outline: none; -webkit-tap-highlight-color: transparent; }
+        .btn-send { background: var(--blue); border: none; color: white; padding: 20px; border-radius: 50px; cursor: pointer; font-weight: 900; width: 100%; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; font-size: 16px; transition: 0.3s; outline: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         
         .live-price { font-size: 22px; font-weight: 900; color: #fff; margin-top: 30px; text-align: center; border: 2px dashed var(--blue); padding: 20px; border-radius: 12px; display: none; background: rgba(59, 130, 246, 0.1); width: 100%; }
         .live-price span#prikaz-cene { color: var(--blue); font-size: 26px; }
@@ -155,7 +156,7 @@
             .about-text p { font-size: 15px; margin-bottom: 30px; }
             .about-image { display: none !important; }
             
-            /* BEDŽEVI: Povećan padding da ne budu premali, ali su i dalje lep red */
+            /* BEDŽEVI: Povećani da popune prostor kako si tražio */
             .stats-grid { display: flex; justify-content: space-between; gap: 8px; width: 100%; }
             .stat-item { width: 32%; padding: 20px 5px !important; border-radius: 8px; border-bottom: 3px solid var(--blue); background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
             .stat-item h3 { font-size: 28px !important; line-height: 1.2 !important; padding-top: 0 !important; margin-bottom: 5px !important; }
@@ -175,19 +176,22 @@
             .price-wrap { justify-content: flex-start; width: 100%; }
             .slider-container { height: 220px; }
             
-            /* KONTAKT SEKCIJA: Totalno čist vertikalni redosled */
+            /* KONTAKT SEKCIJA: Totalno čist Apple-style redosled */
             .contact-section { padding: 60px 5%; }
             .contact-container { flex-direction: column; gap: 40px; }
-            .contact-text h2 { font-size: 34px; word-break: keep-all; hyphens: none; -webkit-hyphens: none; margin-bottom: 15px; }
+            /* word-break: keep-all; naređuje da reč NIKADA ne pukne na pola */
+            .contact-text h2 { font-size: 30px; word-break: keep-all; hyphens: none; -webkit-hyphens: none; margin-bottom: 15px; }
             .contact-text p { font-size: 16px; margin-bottom: 10px; }
             .call-text { font-size: 16px; margin-top: 20px; margin-bottom: 10px; display: block; }
             
-            .btn-call { font-size: 20px; padding: 15px; width: 100%; display: block; border-radius: 12px; margin-top: 0; }
+            /* Dugme za poziv: Čisto, Apple-style plavo pilot dugme sa belim tekstom */
+            .btn-call { font-size: 20px; padding: 15px; width: 100%; display: block; border-radius: 25px; margin-top: 0; box-shadow: none; }
             
-            .contact-form { padding: 25px 15px; border-radius: 15px; width: 100%; }
+            /* Forma: Zaobljenija i prilagođena Apple Look-u */
+            .contact-form { padding: 25px 15px; border-radius: 25px; width: 100%; }
             .form-row { flex-direction: column; gap: 0; }
             input, select { padding: 15px 0; font-size: 15px; }
-            .btn-send { padding: 15px; font-size: 15px; margin-top: 20px; border-radius: 12px; }
+            .btn-send { padding: 15px; font-size: 15px; margin-top: 20px; border-radius: 25px; }
             .live-price { font-size: 18px; padding: 15px; }
             .live-price span#prikaz-cene { font-size: 22px; }
         }
