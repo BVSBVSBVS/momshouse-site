@@ -56,7 +56,6 @@
         
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
         .stat-item { background: white; padding: 30px 15px; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); border-bottom: 5px solid var(--blue); text-align: center; }
-        
         .stat-item h3 { font-size: 46px; font-weight: 900; color: var(--blue); margin-bottom: 5px; line-height: 1.4; padding-top: 10px; }
         .stat-item p { font-size: 11px; font-weight: 900; text-transform: uppercase; color: var(--dark); letter-spacing: 1px; margin-bottom: 0; }
         
@@ -84,7 +83,6 @@
         
         .apt-card { border: 1px solid #E2E8F0; padding: 25px; background: white; transition: 0.4s; border-radius: 20px; display: flex; flex-direction: column; height: 100%; box-shadow: 0 5px 15px rgba(0,0,0,0.02); width: 100%; }
 
-        /* CARD HEADER */
         .price-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; width: 100%; }
         .apt-title { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--dark); line-height: 1.2; width: 55%; }
         .price-wrap { text-align: right; display: flex; align-items: baseline; justify-content: flex-end; }
@@ -92,7 +90,7 @@
         .price { font-weight: 900; font-size: 24px; color: var(--blue); }
         .currency { font-size: 14px; font-weight: 900; color: var(--blue); margin-left: 4px; }
 
-        /* SLAJDER - FLEX: 0 0 100% ZAKUCAVA SLIKE I UBIJA CRNE LINIJE! */
+        /* SLAJDER FIX: UBIJENA CRNA LINIJA (PREKLAPANJE ZA TAČNO 1 PIKSEL) */
         .slider-container { 
             position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; 
             background-color: transparent; touch-action: pan-y; 
@@ -104,11 +102,11 @@
             will-change: transform; 
         }
         .slider-track img { 
-            flex: 0 0 100%; /* OVO JE KLJUČ - NEMA SMANJIVANJA, NEMA CRNIH LINIJA */
-            width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
+            flex: 0 0 100%; min-width: calc(100% + 1px); margin-right: -1px; /* Dodaje 1px da zaključa ivicu */
+            height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
         }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; -webkit-tap-highlight-color: transparent; }
         .slider-btn.prev { left: 10px; }
         .slider-btn.next { right: 10px; }
 
@@ -116,24 +114,25 @@
         
         .apt-bottom { margin-top: auto; }
         .apt-meta { font-size: 11px; font-weight: 900; border-bottom: 1px solid #E2E8F0; padding-bottom: 15px; margin-bottom: 20px; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
-        .btn-inquire { width: 100%; border: 2px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: 900; border-radius: 8px; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; outline: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        .btn-inquire { width: 100%; border: 2px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: 900; border-radius: 8px; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; outline: none; -webkit-tap-highlight-color: transparent; }
 
         /* CONTACT FORM PRO */
         .contact-section { background: var(--dark); color: white; padding: 100px 5%; width: 100%; }
-        .contact-container { display: flex; flex-wrap: wrap; gap: 60px; max-width: 1400px; margin: 0 auto; align-items: center; width: 100%; }
+        .contact-container { display: flex; flex-wrap: wrap; gap: 60px; max-width: 1400px; margin: 0 auto; align-items: flex-start; width: 100%; }
         .contact-text { flex: 1; min-width: 0; width: 100%; }
         .contact-text h2 { font-size: 56px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
         .contact-text p { font-size: 18px; color: #94A3B8; margin-bottom: 10px; }
-        .btn-call { display: inline-block; background: transparent; border: 2px solid var(--blue); color: white !important; padding: 20px 40px; border-radius: 50px; font-weight: 900; font-size: 24px; margin-top: 20px; transition: 0.3s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); text-align: center; touch-action: manipulation; }
+        .call-text { color: #94A3B8; font-size: 18px; margin-top: 30px; margin-bottom: 15px; font-weight: bold; }
+        .btn-call { display: inline-block; background: transparent; border: 2px solid var(--blue); color: white !important; padding: 20px 40px; border-radius: 50px; font-weight: 900; font-size: 24px; transition: 0.3s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); text-align: center; }
         
         .contact-form { flex: 1.2; min-width: 0; width: 100%; background: rgba(255,255,255,0.05); padding: 50px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .form-row { display: flex; gap: 30px; margin-bottom: 15px; width: 100%; }
-        input, select { width: 100%; background: transparent; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); color: white; padding: 20px 0; outline: none; font-size: 16px; transition: 0.3s; font-weight: bold; border-radius: 0; touch-action: manipulation; }
+        input, select { width: 100%; background: transparent; border: none; border-bottom: 2px solid rgba(255,255,255,0.2); color: white; padding: 20px 0; outline: none; font-size: 16px; transition: 0.3s; font-weight: bold; border-radius: 0; }
         input::placeholder { color: rgba(255,255,255,0.5); }
         input:focus, select:focus { border-bottom-color: var(--blue); }
         select option { color: var(--dark); background: white; }
         
-        .btn-send { background: var(--blue); border: none; color: white; padding: 20px; border-radius: 50px; cursor: pointer; font-weight: 900; width: 100%; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; font-size: 16px; transition: 0.3s; outline: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        .btn-send { background: var(--blue); border: none; color: white; padding: 20px; border-radius: 50px; cursor: pointer; font-weight: 900; width: 100%; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; font-size: 16px; transition: 0.3s; outline: none; -webkit-tap-highlight-color: transparent; }
         
         .live-price { font-size: 22px; font-weight: 900; color: #fff; margin-top: 30px; text-align: center; border: 2px dashed var(--blue); padding: 20px; border-radius: 12px; display: none; background: rgba(59, 130, 246, 0.1); width: 100%; }
         .live-price span#prikaz-cene { color: var(--blue); font-size: 26px; }
@@ -154,45 +153,40 @@
             .about-section { padding: 50px 5%; gap: 30px; }
             .about-text h2 { font-size: 32px; margin-bottom: 15px; }
             .about-text p { font-size: 15px; margin-bottom: 30px; }
-            
             .about-image { display: none !important; }
             
-            /* BEDŽEVI: Kompaktni i profesionalni */
+            /* BEDŽEVI: Povećan padding da ne budu premali, ali su i dalje lep red */
             .stats-grid { display: flex; justify-content: space-between; gap: 8px; width: 100%; }
-            .stat-item { width: 32%; padding: 12px 5px !important; border-radius: 8px; border-bottom: 3px solid var(--blue); background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-            .stat-item h3 { font-size: 26px !important; line-height: 1.3 !important; padding-top: 5px !important; margin-bottom: 2px !important; }
-            .stat-item p { font-size: 9px !important; line-height: 1.1 !important; margin: 0 !important; text-align: center; }
+            .stat-item { width: 32%; padding: 20px 5px !important; border-radius: 8px; border-bottom: 3px solid var(--blue); background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            .stat-item h3 { font-size: 28px !important; line-height: 1.2 !important; padding-top: 0 !important; margin-bottom: 5px !important; }
+            .stat-item p { font-size: 10px !important; line-height: 1.1 !important; margin: 0 !important; text-align: center; }
 
             .visit-section { padding: 50px 5%; }
             .section-header h2 { font-size: 32px; }
-            
             .visit-grid { grid-template-columns: 1fr; gap: 20px; }
-            .apartment-grid { grid-template-columns: 1fr; gap: 30px; margin-bottom: 50px; }
             
             .apartments-section { padding: 50px 5%; }
             .location-title { font-size: 28px; margin-bottom: 30px; }
+            .apartment-grid { grid-template-columns: 1fr; gap: 30px; margin-bottom: 50px; }
             
             .apt-card { padding: 15px; border-radius: 12px; }
-            
             .price-row { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 15px; }
             .apt-title { width: 100%; font-size: 22px; line-height: 1.1; }
             .price-wrap { justify-content: flex-start; width: 100%; }
-
             .slider-container { height: 220px; }
             
-            /* KONTAKT SEKCIJA: Modernizovana i prilagođena svakom telefonu */
+            /* KONTAKT SEKCIJA: Totalno čist vertikalni redosled */
             .contact-section { padding: 60px 5%; }
-            .contact-container { gap: 30px; }
-            /* keep-all naređuje da reč NIKADA ne pukne na pola (Nema PLANI RAJTE) */
+            .contact-container { flex-direction: column; gap: 40px; }
             .contact-text h2 { font-size: 34px; word-break: keep-all; hyphens: none; -webkit-hyphens: none; margin-bottom: 15px; }
-            .contact-text p { font-size: 16px; margin-bottom: 20px; }
+            .contact-text p { font-size: 16px; margin-bottom: 10px; }
+            .call-text { font-size: 16px; margin-top: 20px; margin-bottom: 10px; display: block; }
             
-            /* Dugmad više nisu čudne pilule, već pravougaonici kao u aplikacijama */
-            .btn-call { font-size: 18px; padding: 15px; width: 100%; display: block; border-radius: 12px; }
+            .btn-call { font-size: 20px; padding: 15px; width: 100%; display: block; border-radius: 12px; margin-top: 0; }
             
-            .contact-form { padding: 20px 15px; border-radius: 15px; }
+            .contact-form { padding: 25px 15px; border-radius: 15px; width: 100%; }
             .form-row { flex-direction: column; gap: 0; }
-            input, select { padding: 12px 0; font-size: 15px; }
+            input, select { padding: 15px 0; font-size: 15px; }
             .btn-send { padding: 15px; font-size: 15px; margin-top: 20px; border-radius: 12px; }
             .live-price { font-size: 18px; padding: 15px; }
             .live-price span#prikaz-cene { font-size: 22px; }
@@ -483,6 +477,7 @@
             <div class="contact-text">
                 <h2 class="translatable" data-sr="Planirajte vaš boravak" data-en="Plan your stay">Planirajte vaš boravak</h2>
                 <p class="translatable" data-sr="Kontaktirajte nas direktno za najbolje cene i raspoloživost." data-en="Contact us directly for the best rates and availability.">Kontaktirajte nas direktno za najbolje cene i raspoloživost.</p>
+                <p class="call-text translatable" data-sr="Ili nas pozovite odmah:" data-en="Or call us right now:">Ili nas pozovite odmah:</p>
                 <a href="tel:+381659719791" class="btn-call">📞 065 971 97 91</a>
             </div>
             <div class="contact-form">
