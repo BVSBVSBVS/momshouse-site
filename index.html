@@ -26,7 +26,6 @@
         .lang-switch { background: transparent; border: 2px solid var(--gray); color: var(--gray); padding: 6px 14px; cursor: pointer; border-radius: 5px; font-weight: bold; font-size: 12px; transition: 0.3s; outline: none; -webkit-tap-highlight-color: transparent; }
         .btn-book { background: var(--blue); padding: 12px 24px; border-radius: 50px; font-weight: bold; color: white !important; font-size: 13px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* HOVER FIX ZA PC I MOBILNE - Uključuje se hover samo ako uređaj ima pravog miša */
         @media (hover: hover) and (pointer: fine) {
             .nav-center a:hover { color: var(--blue) !important; }
             .lang-switch:hover { background: var(--dark); color: white; border-color: var(--dark); }
@@ -40,7 +39,6 @@
             .stat-item:hover { transform: translateY(-5px); }
         }
 
-        /* ACTIVE state za vizuelni feedback klika na telefonu (odmah se vrati) */
         .lang-switch:active { background: var(--dark); color: white; border-color: var(--dark); }
         .btn-book:active, .btn-send:active { transform: scale(0.98); }
 
@@ -91,22 +89,20 @@
         .price { font-weight: 900; font-size: 24px; color: var(--blue); }
         .currency { font-size: 14px; font-weight: 900; color: var(--blue); margin-left: 4px; }
 
-        /* SLAJDER - FIX ZA CRNE LINIJE I SEKANJE NA iOS */
+        /* SLAJDER - FIX ZA CRNE LINIJE BEZ SKALIRANJA */
         .slider-container { 
             position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; 
-            background-color: #fff; /* Uklonjena tamna pozadina da ne probija */
-            touch-action: pan-y; 
-            -webkit-transform: translateZ(0); transform: translateZ(0); /* Hardverska akceleracija za ivice */
+            background-color: #fff; touch-action: pan-y; 
+            -webkit-transform: translateZ(0); transform: translateZ(0);
         }
         .slider-track { 
             display: flex; width: 100%; height: 100%; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
             will-change: transform; 
-            -webkit-backface-visibility: hidden; backface-visibility: hidden; 
         }
+        /* Dodat min-width 100.5% ubija gap, ali ne crni ivice jer nije scale() */
         .slider-track img { 
-            min-width: 100%; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
+            min-width: 100.5%; height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
-            transform: translateZ(0) scale(1.005); /* Skaliranje od 0.5% ubija svaki mikroskopski gap na telefonu */
         }
         .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; -webkit-tap-highlight-color: transparent; }
         .slider-btn.prev { left: 10px; }
@@ -138,8 +134,9 @@
         .live-price { font-size: 22px; font-weight: 900; color: #fff; margin-top: 30px; text-align: center; border: 2px dashed var(--blue); padding: 20px; border-radius: 12px; display: none; background: rgba(59, 130, 246, 0.1); width: 100%; }
         .live-price span#prikaz-cene { color: var(--blue); font-size: 26px; }
 
+        /* FOOTER - S-Code prelom fix */
         .footer { text-align: center; padding: 60px 20px; background: #050810; color: var(--gray); font-size: 14px; width: 100%; }
-        .footer span { color: white; font-weight: bold; }
+        .footer .agency { color: white; font-weight: bold; white-space: nowrap; }
 
         /* ====== RIGOROZNA MOBILNA OPTIMIZACIJA ====== */
         @media (max-width: 768px) {
@@ -155,11 +152,11 @@
             .about-text h2 { font-size: 32px; margin-bottom: 15px; }
             .about-text p { font-size: 15px; margin-bottom: 30px; }
             
-            /* OVO BRIŠE SLIKU SA TELEFONA JER SMETA */
             .about-image { display: none !important; }
             
+            /* Smanjen padding na mobilnom za statistiku da ne budu baloni */
             .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-            .stat-item { padding: 15px 5px; border-radius: 8px; border-bottom: 3px solid var(--blue); }
+            .stat-item { padding: 10px 5px; border-radius: 8px; border-bottom: 3px solid var(--blue); }
             .stat-item h3 { font-size: 24px; line-height: 1.2; padding-top: 2px; }
             .stat-item p { font-size: 9px; }
 
@@ -515,7 +512,7 @@
     </section>
 
     <footer class="footer">
-        <p>Mom's House © 2026 | Designed & Developed by <span>S-Code Solutions</span></p>
+        <p>Mom's House © 2026 | Designed & Developed by <span class="agency">S-Code&nbsp;Solutions</span></p>
     </footer>
 
     <script>
@@ -574,7 +571,6 @@
             });
             updateUI();
 
-            // Uklanja hover na mobilnom kada se klikne
             setTimeout(() => { document.activeElement.blur(); }, 10);
         }
 
