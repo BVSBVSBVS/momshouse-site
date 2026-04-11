@@ -55,8 +55,11 @@
         
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
         .stat-item { background: white; padding: 35px 15px; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); border-bottom: 5px solid var(--blue); text-align: center; transition: 0.3s; }
-        .stat-item h3 { font-size: 46px; font-weight: 900; color: var(--blue); margin-bottom: 5px; line-height: 1.2; padding-top: 5px; }
+        
+        /* OVO REŠAVA ISEČENU DEVETKU NA PC-u - Povećan line-height i dodatni padding-top */
+        .stat-item h3 { font-size: 46px; font-weight: 900; color: var(--blue); margin-bottom: 5px; line-height: 1.4; padding-top: 10px; }
         .stat-item p { font-size: 11px; font-weight: 900; text-transform: uppercase; color: var(--dark); letter-spacing: 1px; margin-bottom: 0; }
+        
         .about-image { flex: 0.8; min-width: 300px; width: 100%; height: 500px; background: url('onama.jpg') center/cover no-repeat; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
         /* VISIT SECTION */
@@ -89,7 +92,7 @@
         .price { font-weight: 900; font-size: 24px; color: var(--blue); }
         .currency { font-size: 14px; font-weight: 900; color: var(--blue); margin-left: 4px; }
 
-        /* SLAJDER - FIX ZA LINIJE SA SAVRŠENIM SKALIRANJEM I CENTRIRANJEM */
+        /* SLAJDER - VRAĆENO NA STARO I FIKSIRANO DA NE BEŽI */
         .slider-container { 
             position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; 
             background-color: #fff; touch-action: pan-y; 
@@ -99,9 +102,9 @@
             display: flex; width: 100%; height: 100%; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
             will-change: transform; 
         }
-        /* Slika je 102% širine, margina -1% je savršeno centrira i preklapa ivice */
+        /* Slika je tačno 100% širine, centrirana i bez skaliranja */
         .slider-track img { 
-            width: 102%; margin-left: -1%; height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
+            width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; pointer-events: none; 
             -webkit-backface-visibility: hidden; backface-visibility: hidden; flex-shrink: 0;
         }
         .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); color: var(--dark); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; -webkit-tap-highlight-color: transparent; }
@@ -154,19 +157,17 @@
             .about-image { display: none !important; }
             
             /* BEDŽEVI (STATISTIKA): Smanjen padding na mobilnom da ne budu baloni */
-            .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-            .stat-item { padding: 10px 5px; border-radius: 8px; border-bottom: 3px solid var(--blue); }
-            .stat-item h3 { font-size: 24px; line-height: 1.2; padding-top: 2px; }
-            .stat-item p { font-size: 9px; }
+            /* Vraćen grid sistem, ali sa dramatično smanjenim paddingom unutar kartica */
+            .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; display: grid; }
+            .stat-item { padding: 8px 3px !important; border-radius: 8px; border-bottom: 3px solid var(--blue); background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+            .stat-item h3 { font-size: 22px !important; line-height: 1; padding: 0 !important; margin-top: 5px !important; margin-bottom: 2px !important; }
+            .stat-item p { font-size: 8px !important; line-height: 1.2 !important; text-align: center; margin: 0 !important; }
 
             .visit-section { padding: 50px 5%; }
             .section-header h2 { font-size: 32px; }
             
             .visit-grid { grid-template-columns: 1fr; gap: 20px; }
             .apartment-grid { grid-template-columns: 1fr; gap: 30px; margin-bottom: 50px; }
-            
-            .apartments-section { padding: 50px 5%; }
-            .location-title { font-size: 28px; margin-bottom: 30px; }
             
             .apt-card { padding: 15px; border-radius: 12px; }
             .slider-container { height: 220px; }
