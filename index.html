@@ -38,6 +38,7 @@
             .btn-inquire:hover { background: var(--dark); color: white; }
             .btn-call:hover { background: var(--blue); transform: translateY(-5px); }
             .btn-send:hover { background: #2563EB; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); }
+            .lb-btn:hover { background: rgba(255,255,255,0.4) !important; }
         }
 
         .lang-switch:active { background: var(--dark); color: white; border-color: var(--dark); }
@@ -48,7 +49,7 @@
         .hero h1 { font-size: 8vw; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; margin-bottom: 10px; }
         .subtitle { letter-spacing: 5px; font-size: 16px; opacity: 0.9; text-transform: uppercase; font-weight: bold; }
 
-        /* ABOUT & PRO STATS - POVEĆANI BEDŽEVI NA PC-u */
+        /* ABOUT & PRO STATS */
         .about-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; display: flex; gap: 80px; align-items: center; flex-wrap: wrap; width: 100%; }
         .about-text { flex: 1.2; min-width: 0; width: 100%; }
         .about-text h2 { font-size: 42px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; line-height: 1.1; }
@@ -90,11 +91,17 @@
         .price { font-weight: 900; font-size: 24px; color: var(--blue); }
         .currency { font-size: 14px; font-weight: 900; color: var(--blue); margin-left: 4px; }
 
-        /* SLAJDER - ZAUVEK UBIO CRNU LINIJU (OBJECT-FIT: COVER ZAKUCAVA) */
+        /* SLAJDER - SA OPCIJOM ZA GALERIJU */
         .slider-container { 
             position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; 
             background-color: transparent; touch-action: pan-y; 
             -webkit-transform: translateZ(0); transform: translateZ(0);
+            cursor: pointer;
+        }
+        .slider-container::after {
+            content: '🔍 GALERIJA'; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); 
+            background: rgba(0,0,0,0.6); color: white; padding: 6px 14px; border-radius: 20px; font-size: 11px; 
+            font-weight: 900; letter-spacing: 1px; pointer-events: none; z-index: 5; backdrop-filter: blur(4px);
         }
         .slider-track { 
             display: flex; width: 100%; height: 100%; 
@@ -103,7 +110,7 @@
         }
         .slider-track img { 
             flex: 0 0 100%; width: 100%; height: 100%; max-width: none;
-            object-fit: cover; /* OVO JE KONAČAN FIX - CENTRIRA I POKRIVA SAV PROSTOR! */
+            object-fit: cover; 
             -webkit-user-drag: none; pointer-events: none; 
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
         }
@@ -117,6 +124,13 @@
         .apt-meta { font-size: 11px; font-weight: 900; border-bottom: 1px solid #E2E8F0; padding-bottom: 15px; margin-bottom: 20px; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
         .btn-inquire { width: 100%; border: 2px solid var(--dark); background: transparent; color: var(--dark); padding: 15px; cursor: pointer; transition: 0.3s; font-weight: 900; border-radius: 8px; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; outline: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
+        /* LIGHTBOX GALERIJA */
+        .lightbox { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 15, 28, 0.98); z-index: 99999; display: none; align-items: center; justify-content: center; flex-direction: column; backdrop-filter: blur(10px); }
+        .lightbox img { max-width: 95%; max-height: 80%; border-radius: 12px; object-fit: contain; box-shadow: 0 20px 50px rgba(0,0,0,0.5); user-select: none; }
+        .lightbox .close-btn { position: absolute; top: 25px; right: 30px; color: white; font-size: 45px; cursor: pointer; z-index: 100000; line-height: 1; font-weight: 400; }
+        .lightbox .lb-controls { position: absolute; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; }
+        .lightbox .lb-btn { background: rgba(255,255,255,0.15); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; pointer-events: auto; backdrop-filter: blur(5px); transition: 0.3s; }
+        
         /* CONTACT FORM PRO */
         .contact-section { background: var(--dark); color: white; padding: 100px 5%; width: 100%; }
         .contact-container { display: flex; flex-wrap: wrap; gap: 60px; max-width: 1400px; margin: 0 auto; align-items: flex-start; width: 100%; }
@@ -124,7 +138,7 @@
         .contact-text h2 { font-size: 56px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
         .contact-text p { font-size: 18px; color: #94A3B8; margin-bottom: 10px; }
         .call-text { color: #94A3B8; font-size: 18px; margin-top: 30px; margin-bottom: 15px; font-weight: bold; }
-        .btn-call { display: inline-block; background: transparent; border: 2px solid var(--blue); color: white !important; padding: 20px 40px; border-radius: 50px; font-weight: 900; font-size: 24px; transition: 0.3s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); text-align: center; }
+        .btn-call { display: inline-block; background: transparent; border: 2px solid var(--blue); color: white !important; padding: 20px 40px; border-radius: 50px; font-weight: 900; font-size: 24px; transition: 0.3s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); text-align: center; touch-action: manipulation; }
         
         .contact-form { flex: 1.2; min-width: 0; width: 100%; background: rgba(255,255,255,0.05); padding: 50px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .form-row { display: flex; gap: 30px; margin-bottom: 15px; width: 100%; }
@@ -156,7 +170,6 @@
             .about-text p { font-size: 15px; margin-bottom: 30px; }
             .about-image { display: none !important; }
             
-            /* BEDŽEVI: Povećani da popune prostor kako si tražio */
             .stats-grid { display: flex; justify-content: space-between; gap: 8px; width: 100%; }
             .stat-item { width: 32%; padding: 20px 5px !important; border-radius: 8px; border-bottom: 3px solid var(--blue); background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
             .stat-item h3 { font-size: 28px !important; line-height: 1.2 !important; padding-top: 0 !important; margin-bottom: 5px !important; }
@@ -176,18 +189,14 @@
             .price-wrap { justify-content: flex-start; width: 100%; }
             .slider-container { height: 220px; }
             
-            /* KONTAKT SEKCIJA: Totalno čist Apple-style redosled */
             .contact-section { padding: 60px 5%; }
             .contact-container { flex-direction: column; gap: 40px; }
-            /* word-break: keep-all; naređuje da reč NIKADA ne pukne na pola */
             .contact-text h2 { font-size: 30px; word-break: keep-all; hyphens: none; -webkit-hyphens: none; margin-bottom: 15px; }
             .contact-text p { font-size: 16px; margin-bottom: 10px; }
             .call-text { font-size: 16px; margin-top: 20px; margin-bottom: 10px; display: block; }
             
-            /* Dugme za poziv: Čisto, Apple-style plavo pilot dugme sa belim tekstom */
             .btn-call { font-size: 20px; padding: 15px; width: 100%; display: block; border-radius: 25px; margin-top: 0; box-shadow: none; }
             
-            /* Forma: Zaobljenija i prilagođena Apple Look-u */
             .contact-form { padding: 25px 15px; border-radius: 25px; width: 100%; }
             .form-row { flex-direction: column; gap: 0; }
             input, select { padding: 15px 0; font-size: 15px; }
@@ -198,6 +207,15 @@
     </style>
 </head>
 <body id="top">
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn" onclick="zatvoriGaleriju()">×</span>
+        <div class="lb-controls">
+            <button class="lb-btn" onclick="menjajSlikuGalerija(-1)">‹</button>
+            <button class="lb-btn" onclick="menjajSlikuGalerija(1)">›</button>
+        </div>
+        <img id="lightbox-img" src="" alt="Galerija">
+    </div>
 
     <nav class="navbar">
         <a href="#top" class="logo">MOM'S HOUSE<span>.</span></a>
@@ -289,7 +307,7 @@
                     <div class="apt-title"><span class="translatable" data-sr="Apartman" data-en="Apartment">Apartman</span><br>BLUE</div>
                     <div class="price-wrap">
                         <span class="starting-from translatable" data-sr="OD" data-en="FROM">OD</span>
-                        <span class="price"><span class="price-val" data-eur="38">4500</span><span class="currency">RSD</span></span>
+                        <span class="price"><span class="price-val" data-eur="40">4680</span><span class="currency">RSD</span></span>
                     </div>
                 </div>
                 <div class="slider-container" id="slider-blue">
@@ -305,7 +323,7 @@
                 </div>
                 <p class="apt-desc translatable" data-sr="Moderan i svetao apartman, idealan za parove ili male porodice." data-en="Modern and bright apartment, perfect for couples or small families.">Moderan i svetao apartman, idealan za parove ili male porodice.</p>
                 <div class="apt-bottom">
-                    <div class="apt-meta">✓ WiFi ✓ Klima ✓ Smart TV ✓ Max 3 Gosta</div>
+                    <div class="apt-meta">✓ WiFi ✓ Klima ✓ Smart TV ✓ Max 4 Gosta</div>
                     <button class="btn-inquire translatable" data-sr="POŠALJI UPIT" data-en="INQUIRE NOW" onclick="odaberiApartman('blue')">POŠALJI UPIT</button>
                 </div>
             </div>
@@ -315,7 +333,7 @@
                     <div class="apt-title"><span class="translatable" data-sr="Apartman" data-en="Apartment">Apartman</span><br>GOLD</div>
                     <div class="price-wrap">
                         <span class="starting-from translatable" data-sr="OD" data-en="FROM">OD</span>
-                        <span class="price"><span class="price-val" data-eur="38">4500</span><span class="currency">RSD</span></span>
+                        <span class="price"><span class="price-val" data-eur="45">5265</span><span class="currency">RSD</span></span>
                     </div>
                 </div>
                 <div class="slider-container" id="slider-gold">
@@ -341,7 +359,7 @@
                     <div class="apt-title"><span class="translatable" data-sr="Apartman" data-en="Apartment">Apartman</span><br>GREEN</div>
                     <div class="price-wrap">
                         <span class="starting-from translatable" data-sr="OD" data-en="FROM">OD</span>
-                        <span class="price"><span class="price-val" data-eur="38">4500</span><span class="currency">RSD</span></span>
+                        <span class="price"><span class="price-val" data-eur="35">4095</span><span class="currency">RSD</span></span>
                     </div>
                 </div>
                 <div class="slider-container" id="slider-green">
@@ -367,7 +385,7 @@
                     <div class="apt-title"><span class="translatable" data-sr="Apartman" data-en="Apartment">Apartman</span><br>WHITE</div>
                     <div class="price-wrap">
                         <span class="starting-from translatable" data-sr="OD" data-en="FROM">OD</span>
-                        <span class="price"><span class="price-val" data-eur="38">4500</span><span class="currency">RSD</span></span>
+                        <span class="price"><span class="price-val" data-eur="40">4680</span><span class="currency">RSD</span></span>
                     </div>
                 </div>
                 <div class="slider-container" id="slider-white">
@@ -395,10 +413,10 @@
         <div class="apartment-grid">
             <div class="apt-card">
                 <div class="price-row">
-                    <div class="apt-title"><span class="translatable" data-sr="Apartman" data-en="Apartment">Apartman</span><br><span class="translatable" data-sr="DUNAV" data-en="DUNAV">DUNAV</span></div>
+                    <div class="apt-title"><span class="translatable" data-sr="Apartman" data-en="Apartment">Apartman</span><br><span class="translatable" data-sr="DUNAV" data-en="DANUBE">DUNAV</span></div>
                     <div class="price-wrap">
                         <span class="starting-from translatable" data-sr="OD" data-en="FROM">OD</span>
-                        <span class="price"><span class="price-val" data-eur="45">5286</span><span class="currency">RSD</span></span>
+                        <span class="price"><span class="price-val" data-eur="45">5265</span><span class="currency">RSD</span></span>
                     </div>
                 </div>
                 <div class="slider-container" id="slider-asp">
@@ -426,7 +444,7 @@
                     <div class="apt-title"><span class="translatable" data-sr="Apartman" data-en="Ground Floor">Apartman</span><br><span class="translatable" data-sr="Prizemlje" data-en="Apartment">Prizemlje</span></div>
                     <div class="price-wrap">
                         <span class="starting-from translatable" data-sr="OD" data-en="FROM">OD</span>
-                        <span class="price"><span class="price-val" data-eur="40">4698</span><span class="currency">RSD</span></span>
+                        <span class="price"><span class="price-val" data-eur="40">4680</span><span class="currency">RSD</span></span>
                     </div>
                 </div>
                 <div class="slider-container" id="slider-prizemlje">
@@ -452,7 +470,7 @@
                     <div class="apt-title"><span class="translatable" data-sr="Apartman sa" data-en="Balcony">Apartman sa</span><br><span class="translatable" data-sr="Balkonom" data-en="Apartment">Balkonom</span></div>
                     <div class="price-wrap">
                         <span class="starting-from translatable" data-sr="OD" data-en="FROM">OD</span>
-                        <span class="price"><span class="price-val" data-eur="45">5286</span><span class="currency">RSD</span></span>
+                        <span class="price"><span class="price-val" data-eur="45">5265</span><span class="currency">RSD</span></span>
                     </div>
                 </div>
                 <div class="slider-container" id="slider-balkon">
@@ -500,7 +518,7 @@
                                 <option value="white">Apartman WHITE</option>
                             </optgroup>
                             <optgroup label="Cara Lazara">
-                                <option value="dunav" class="translatable" data-sr="Apartman DUNAV" data-en="Apartment DUNAV">Apartman DUNAV</option>
+                                <option value="dunav" class="translatable" data-sr="Apartman DUNAV" data-en="Apartment DANUBE">Apartman DANUBE</option>
                                 <option value="prizemlje" class="translatable" data-sr="Apartman Prizemlje" data-en="Ground Floor Apt.">Apartman Prizemlje</option>
                                 <option value="balkon" class="translatable" data-sr="Apartman Balkon" data-en="Balcony Apt.">Apartman Balkon</option>
                             </optgroup>
@@ -528,20 +546,22 @@
 
     <script>
         let currentLang = 'sr';
-        let exchangeRate = 117;
+        let exchangeRate = 117.15; // Zvaničan bazni kurs
 
-        const ceneBooking = {
-            "blue": { "1": 4500, "2": 4500, "3": 5100, "4": 5700 },
-            "gold": { "1": 4500, "2": 4500, "3": 5100, "4": 5700 },
-            "green": { "1": 4500, "2": 4500, "3": 5100, "4": 5700 },
-            "white": { "1": 4500, "2": 4500, "3": 5100, "4": 5700 },
-            "dunav": { "1": 5286, "2": 5286, "3": 5873, "4": 6460 },
-            "prizemlje": { "1": 4698, "2": 4698, "3": 5286, "4": 5873 },
-            "balkon": { "1": 5286, "2": 5286, "3": 5873, "4": 6460 }
+        // Cene sada striktno prate EU vrednosti po tvojim instrukcijama
+        const ceneBookingEur = {
+            "blue": { "1": 40, "2": 40, "3": 45, "4": 50 },
+            "gold": { "1": 45, "2": 45, "3": 50 }, // Max 3
+            "green": { "1": 35, "2": 35, "3": 40 }, // Max 3
+            "white": { "1": 40, "2": 40, "3": 45 }, // Max 3
+            "dunav": { "1": 45, "2": 45, "3": 50, "4": 55 },
+            "prizemlje": { "1": 40, "2": 40, "3": 45, "4": 50 },
+            "balkon": { "1": 45, "2": 45, "3": 50, "4": 55 }
         };
 
         async function fetchLiveExchangeRate() {
             try {
+                // Praćenje LIVE kursa koji je u rangu sa Narodnom Bankom
                 const response = await fetch('https://api.exchangerate-api.com/v4/latest/EUR');
                 const data = await response.json();
                 if (data && data.rates && data.rates.RSD) {
@@ -598,16 +618,24 @@
             const livePriceDiv = document.getElementById('kalkulator-cene');
             const prikazCene = document.getElementById('prikaz-cene');
 
-            if (apt && gosti && ceneBooking[apt] && ceneBooking[apt][gosti]) {
-                const rsd = ceneBooking[apt][gosti];
-                if (currentLang === 'sr') {
-                    prikazCene.innerText = rsd + " RSD";
+            if (apt && gosti) {
+                if (ceneBookingEur[apt] && ceneBookingEur[apt][gosti]) {
+                    const eur = ceneBookingEur[apt][gosti];
+                    if (currentLang === 'sr') {
+                        prikazCene.innerText = Math.round(eur * exchangeRate) + " RSD";
+                    } else {
+                        prikazCene.innerText = "€" + eur;
+                    }
+                    livePriceDiv.style.display = 'block';
                 } else {
-                    prikazCene.innerText = "€" + Math.round(rsd / exchangeRate);
+                    // Previše gostiju za dati apartman (npr. Gold max 3, izabrano 4)
+                    prikazCene.innerText = currentLang === 'sr' ? "Previše gostiju za ovaj apartman." : "Too many guests for this apartment.";
+                    prikazCene.style.fontSize = "16px";
+                    livePriceDiv.style.display = 'block';
                 }
-                livePriceDiv.style.display = 'block';
             } else { 
                 livePriceDiv.style.display = 'none'; 
+                prikazCene.style.fontSize = "26px";
             }
         }
 
@@ -634,22 +662,59 @@
             track.style.transform = `translate3d(-${state.index * 100}%, 0, 0)`;
         }
 
+        let activeGallery = [];
+        let activeGalleryIndex = 0;
+
+        function otvoriGaleriju(id) {
+            const track = document.getElementById('track-' + id);
+            const images = Array.from(track.querySelectorAll('img')).filter(img => img.style.display !== 'none');
+            activeGallery = images.map(img => img.src);
+            activeGalleryIndex = sliderState[id].index;
+            
+            document.getElementById('lightbox-img').src = activeGallery[activeGalleryIndex];
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function zatvoriGaleriju() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function menjajSlikuGalerija(dir) {
+            activeGalleryIndex += dir;
+            if (activeGalleryIndex < 0) activeGalleryIndex = activeGallery.length - 1;
+            if (activeGalleryIndex >= activeGallery.length) activeGalleryIndex = 0;
+            document.getElementById('lightbox-img').src = activeGallery[activeGalleryIndex];
+        }
+
         function initSliders() {
             document.querySelectorAll('.slider-container').forEach(container => {
                 const id = container.id.replace('slider-', '');
-                
                 let startX = 0;
-                let endX = 0;
+                let isDragging = false;
 
                 container.addEventListener('touchstart', e => {
                     startX = e.touches[0].clientX;
+                    isDragging = false;
+                }, {passive: true});
+
+                container.addEventListener('touchmove', e => {
+                    isDragging = true;
                 }, {passive: true});
 
                 container.addEventListener('touchend', e => {
-                    endX = e.changedTouches[0].clientX;
-                    if (startX - endX > 40) moveSlide(id, 1);
-                    if (endX - startX > 40) moveSlide(id, -1);
+                    let endX = e.changedTouches[0].clientX;
+                    let diff = startX - endX;
+                    if (isDragging && Math.abs(diff) > 40) {
+                        if (diff > 0) moveSlide(id, 1);
+                        else moveSlide(id, -1);
+                    }
                 }, {passive: true});
+
+                // Klik na kontejner otvara Fullscreen galeriju
+                container.addEventListener('click', e => {
+                    if (e.target.classList.contains('slider-btn')) return;
+                    otvoriGaleriju(id);
+                });
             });
         }
 
@@ -665,8 +730,9 @@
             }
 
             let cenaIzvestaj = "";
-            if (ceneBooking[apt] && ceneBooking[apt][gosti]) {
-                cenaIzvestaj = "%0AProcenjena cena: " + ceneBooking[apt][gosti] + " RSD / noc";
+            if (ceneBookingEur[apt] && ceneBookingEur[apt][gosti]) {
+                const rsdCena = Math.round(ceneBookingEur[apt][gosti] * exchangeRate);
+                cenaIzvestaj = "%0AProcenjena cena: " + rsdCena + " RSD / noc";
             }
 
             const roditeljskiMejl = "momshouseapartments@gmail.com"; 
