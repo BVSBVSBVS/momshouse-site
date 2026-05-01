@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
@@ -285,6 +285,13 @@
                 <div class="visit-meta translatable" data-sr="ANTIKA NA DUNAVU" data-en="ANTIQUITY ON THE DANUBE">ANTIKA NA DUNAVU</div>
                 <p class="visit-desc translatable" data-sr="Rimski grad i vojni logor na ušću Mlave u Dunav, svedočanstvo moći Rimskog carstva na ovim prostorima." data-en="Roman city and military camp at the mouth of the Mlava into the Danube, a testimony to the power of the Roman Empire in these areas.">Rimski grad i vojni logor na ušću Mlave u Dunav, svedočanstvo moći Rimskog carstva na ovim prostorima.</p>
             </div>
+            <!-- NOVA KARTICA: Manastir Tumane -->
+            <div class="visit-card">
+                <div class="visit-image" style="background-image: url('tumane.jpg')"></div>
+                <div class="visit-card-title translatable" data-sr="Manastir Tumane" data-en="Tumane Monastery">Manastir Tumane</div>
+                <div class="visit-meta translatable" data-sr="Na ~12km udaljenosti" data-en="~12km distance">Na ~12km udaljenosti</div>
+                <p class="visit-desc translatable" data-sr="Srednjovekovni manastir u prelepom prirodnom okruženju, poznat po duhovnom miru i čudotvornim moštima." data-en="A medieval monastery in a beautiful natural setting, known for its spiritual peace and miraculous relics.">Srednjovekovni manastir u prelepom prirodnom okruženju, poznat po duhovnom miru i čudotvornim moštima.</p>
+            </div>
         </div>
     </section>
 
@@ -538,7 +545,6 @@
 
     <script>
         let currentLang = 'sr';
-        /* Zakucano na 120 (API neće ga pregaziti jer nismo zvali funkciju) */
         let exchangeRate = 120; 
 
         const ceneBookingEur = {
@@ -638,7 +644,6 @@
             if (state.index < 0) state.index = state.max;
             if (state.index > state.max) state.index = 0;
             
-            /* INSTANT ZAMENA: Menjamo poziciju bez CSS animacije */
             track.style.transform = `translateX(-${state.index * 100}%)`;
         }
 
@@ -724,7 +729,6 @@
         }
 
         window.onload = () => { 
-            /* API poziv je obrisan kako ne bi prebrisao tvoj kurs od 120 RSD */
             updateUI(); 
             initSliders();
         };
