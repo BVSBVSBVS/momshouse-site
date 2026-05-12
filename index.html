@@ -705,7 +705,7 @@
         }
 
         // Inicijalizuj EmailJS (Ubaci svoj Public Key ovde)
-        emailjs.init("TVOJ_PUBLIC_KEY");
+        emailjs.init("3vfAgkdLsRBt6PAAE");
 
         function posaljiMejl() {
             const ime = document.getElementById('klijent-ime').value;
@@ -740,7 +740,7 @@
             };
 
             // UBACI SVOJ SERVICE ID i TEMPLATE ID OVDE
-            emailjs.send('TVOJ_SERVICE_ID', 'TVOJ_TEMPLATE_ID', templateParams)
+            emailjs.send('service_cb5tpza', 'template_gp7mguu', templateParams)
                 .then(function(response) {
                     // Ako je uspešno poslato
                     alert(currentLang === 'sr' ? 'Zvanični upit je uspešno poslat! Kontaktiraćemo vas uskoro.' : 'Inquiry successfully sent! We will contact you soon.');
