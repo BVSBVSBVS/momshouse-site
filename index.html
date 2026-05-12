@@ -7,6 +7,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <style>
         :root { --blue: #3B82F6; --dark: #0A0F1C; --light: #F8FAFC; --gray: #64748B; }
         
@@ -702,36 +704,57 @@
             });
         }
 
+        // Inicijalizuj EmailJS (Ubaci svoj Public Key ovde)
+        emailjs.init("TVOJ_PUBLIC_KEY");
+
         function posaljiMejl() {
             const ime = document.getElementById('klijent-ime').value;
             const email = document.getElementById('klijent-email').value;
             const apt = document.getElementById('apartment-select').value;
             const gosti = document.getElementById('guest-select').value;
+            const dugme = document.querySelector('.btn-send');
             
             if(!ime || !email || !apt || !gosti) { 
                 alert(currentLang === 'sr' ? 'Molimo popunite sva polja pre slanja.' : 'Please fill out all fields before sending.'); 
                 return; 
             }
 
-            let cenaIzvestaj = "";
+            // Promeni tekst dugmeta dok se šalje
+            const originalniTekst = dugme.innerText;
+            dugme.innerText = currentLang === 'sr' ? 'SLANJE U TOKU...' : 'SENDING...';
+            dugme.disabled = true;
+
+            let cenaIzvestaj = "Nije izračunato";
             if (ceneBookingEur[apt] && ceneBookingEur[apt][gosti]) {
                 const rsdCena = Math.round(ceneBookingEur[apt][gosti] * exchangeRate);
-                cenaIzvestaj = "%0AProcenjena cena: " + rsdCena + " RSD / noc";
+                cenaIzvestaj = rsdCena + " RSD / noć";
             }
 
-            const roditeljskiMejl = "momshouseapartments@gmail.com"; 
-            const lepoImeApt = apt.toUpperCase();
-            
-            const subject = "Nova rezervacija - " + lepoImeApt;
-            const body = "Ime: " + ime + "%0AEmail: " + email + "%0A%0AApartman: " + lepoImeApt + "%0ABroj gostiju: " + gosti + cenaIzvestaj + "%0A%0AMolimo kontaktirajte me radi potvrde.";
-            
-            window.location.href = `mailto:${roditeljskiMejl}?subject=${subject}&body=${body}`;
-        }
+            // Podaci koji idu u tvoj EmailJS šablon
+            const templateParams = {
+                ime: ime,
+                email: email,
+                apartman: apt.toUpperCase(),
+                gosti: gosti,
+                cena: cenaIzvestaj
+            };
 
-        window.onload = () => { 
-            updateUI(); 
-            initSliders();
-        };
+            // UBACI SVOJ SERVICE ID i TEMPLATE ID OVDE
+            emailjs.send('TVOJ_SERVICE_ID', 'TVOJ_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    // Ako je uspešno poslato
+                    alert(currentLang === 'sr' ? 'Zvanični upit je uspešno poslat! Kontaktiraćemo vas uskoro.' : 'Inquiry successfully sent! We will contact you soon.');
+                    dugme.innerText = originalniTekst;
+                    dugme.disabled = false;
+                    document.getElementById('contactForm').reset();
+                    document.getElementById('kalkulator-cene').style.display = 'none';
+                }, function(error) {
+                    // Ako pukne nešto
+                    alert(currentLang === 'sr' ? 'Došlo je do greške pri slanju. Pokušajte ponovo.' : 'An error occurred. Please try again.');
+                    dugme.innerText = originalniTekst;
+                    dugme.disabled = false;
+                });
+        }
     </script>
 </body>
 </html>
